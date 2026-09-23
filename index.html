@@ -227,7 +227,7 @@
   inset: 0;
   z-index: -1;
   background:
-    linear-gradient(rgba(10, 15, 30, 0.75), rgba(10, 15, 30, 0.75)),
+    linear-gradient(rgba(10, 15, 30, 0.75), rgba(10, 15, 30, 1)),
     url("bc2.png") center / cover no-repeat;
 }
 
@@ -720,6 +720,41 @@
       padding: 56px 0 40px;
       margin-top: 40px;
     }
+
+
+
+
+
+
+
+
+footer {
+  position: relative;
+  isolation: isolate;
+  background: transparent;   /* removes the old footer background */
+}
+footer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(rgba(10, 15, 30, 0.75), rgba(10, 15, 30, 1)),
+    url("bc2.png") center / cover no-repeat;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+    
 
     .foot-grid {
       display: grid;
