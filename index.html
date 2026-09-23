@@ -108,6 +108,10 @@
       padding: 18px 24px;
       max-width: 1240px;
       margin: 0 auto;
+      margin-right: auto;
+      margin-left: auto;
+      width: 100%;
+
     }
 
     .brand {
@@ -737,7 +741,7 @@
       gap: 12px;
       padding-top: 24px;
       border-top: 1px solid var(--glass-border);
-      font-size: 12.5px;
+      font-size: 0.6rem;
       color: var(--ink-faint);
     }
 
@@ -763,7 +767,7 @@
       left: 0;
       bottom: 0;
       z-index: 100;
-      width: 235px;
+      width: 191px;
       max-width: 82vw;
       background: rgba(7, 14, 26, 0.98);
       border-right: 1px solid var(--glass-border);
@@ -830,11 +834,11 @@
 
     .sidebar-nav a {
       display: flex;
-      align-items: center;
+      align-items: start;
       gap: 13px;
-      padding: 12px 14px;
+      padding: 10px 0px;
       border-radius: 12px;
-      font-size: 14.5px;
+      font-size: 10.5px;
       font-weight: 500;
       color: var(--ink-soft);
       opacity: 0;
@@ -1327,7 +1331,7 @@
       }
 
       .foot-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr auto;
         gap: 28px;
       }
 
@@ -1440,7 +1444,7 @@
   <header>
     <nav>
       <div class="brand">
-          <img class="logo" src="logo.png" alt="ORCA Logo">
+        <img class="logo" src="logo.png" alt="ORCA Logo">
         ORCA
       </div>
       <div class="nav-links">
@@ -1466,10 +1470,10 @@
   <aside class="sidebar" id="sidebar" aria-hidden="true">
     <div class="sidebar-head">
       <div class="sidebar-brand">
-         <div class="brand">
+        <div class="brand">
           <img class="logo" src="logo.png" alt="ORCA Logo">
-        ORCA
-      </div>
+          ORCA
+        </div>
       </div>
       <button class="sidebar-close" id="sidebarClose" aria-label="Close menu">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1848,78 +1852,79 @@
     </div>
 
   </footer>
-  </body>
+</body>
 
-  <script>
-    document.querySelectorAll('.tab').forEach(tab => {
-      tab.addEventListener('click', () => {
-        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-        document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
-        tab.classList.add('active');
-        document.getElementById(tab.dataset.tab).classList.add('active');
-      });
+<script>
+  document.querySelectorAll('.tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById(tab.dataset.tab).classList.add('active');
     });
+  });
 
-    const menuBtn = document.getElementById('menuToggle');
-    const sidebar = document.getElementById('sidebar');
-    const sidebarClose = document.getElementById('sidebarClose');
-    const sidebarBackdrop = document.getElementById('sidebarBackdrop');
+  const menuBtn = document.getElementById('menuToggle');
+  const sidebar = document.getElementById('sidebar');
+  const sidebarClose = document.getElementById('sidebarClose');
+  const sidebarBackdrop = document.getElementById('sidebarBackdrop');
 
-    function openSidebar() {
-      sidebar.classList.add('open');
-      sidebarBackdrop.classList.add('open');
-      sidebar.setAttribute('aria-hidden', 'false');
-      menuBtn.setAttribute('aria-expanded', 'true');
-      document.body.classList.add('sidebar-locked');
-    }
-    function closeSidebar() {
-      sidebar.classList.remove('open');
-      sidebarBackdrop.classList.remove('open');
-      sidebar.setAttribute('aria-hidden', 'true');
-      menuBtn.setAttribute('aria-expanded', 'false');
-      document.body.classList.remove('sidebar-locked');
-    }
-    menuBtn.addEventListener('click', openSidebar);
-    sidebarClose.addEventListener('click', closeSidebar);
-    sidebarBackdrop.addEventListener('click', closeSidebar);
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeSidebar();
-    });
-    sidebar.querySelectorAll('a').forEach(a => a.addEventListener('click', closeSidebar));
+  function openSidebar() {
+    sidebar.classList.add('open');
+    sidebarBackdrop.classList.add('open');
+    sidebar.setAttribute('aria-hidden', 'false');
+    menuBtn.setAttribute('aria-expanded', 'true');
+    document.body.classList.add('sidebar-locked');
+  }
+  function closeSidebar() {
+    sidebar.classList.remove('open');
+    sidebarBackdrop.classList.remove('open');
+    sidebar.setAttribute('aria-hidden', 'true');
+    menuBtn.setAttribute('aria-expanded', 'false');
+    document.body.classList.remove('sidebar-locked');
+  }
+  menuBtn.addEventListener('click', openSidebar);
+  sidebarClose.addEventListener('click', closeSidebar);
+  sidebarBackdrop.addEventListener('click', closeSidebar);
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeSidebar();
+  });
+  sidebar.querySelectorAll('a').forEach(a => a.addEventListener('click', closeSidebar));
 
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const revealEls = Array.from(document.querySelectorAll('.reveal'));
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const revealEls = Array.from(document.querySelectorAll('.reveal'));
 
-    function showAll() {
-      revealEls.forEach(el => el.classList.add('in'));
-    }
+  function showAll() {
+    revealEls.forEach(el => el.classList.add('in'));
+  }
 
-    if (reduceMotion || revealEls.length === 0) {
-      showAll();
-    } else if ('IntersectionObserver' in window) {
-      try {
-        const io = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              const i = revealEls.indexOf(entry.target);
-              const delay = (i % 4) * 80; // stagger within a row, capped
-              setTimeout(() => entry.target.classList.add('in'), delay);
-              io.unobserve(entry.target);
-            }
-          });
-        }, { threshold: 0.12, rootMargin: '0px 0px -30px 0px' });
-        revealEls.forEach(el => io.observe(el));
-      } catch (e) {
-        showAll();
-      }
-    } else {
+  if (reduceMotion || revealEls.length === 0) {
+    showAll();
+  } else if ('IntersectionObserver' in window) {
+
+    try {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const i = revealEls.indexOf(entry.target);
+            const delay = (i % 4) * 80; // stagger within a row, capped
+            setTimeout(() => entry.target.classList.add('in'), delay);
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -30px 0px' });
+      revealEls.forEach(el => io.observe(el));
+    } catch (e) {
       showAll();
     }
+  } else {
+    showAll();
+  }
 
-    // safety net: if anything is still hidden after 2s (observer failure,
-    // sandboxed iframe, etc.), force it visible so content is never lost
-    setTimeout(showAll, 2000);
-  </script>
+  // safety net: if anything is still hidden after 2s (observer failure,
+  // sandboxed iframe, etc.), force it visible so content is never lost
+  setTimeout(showAll, 2000);
+</script>
 
 
 </html>
