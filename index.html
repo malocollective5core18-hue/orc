@@ -117,7 +117,6 @@
     .brand {
       display: flex;
       align-items: center;
-      gap: 10px;
       font-weight: 700;
       font-size: 19px;
       letter-spacing: -0.01em;
@@ -576,7 +575,7 @@
       display: flex;
       gap: 6px;
       padding: 8px;
-      flex-wrap: wrap;
+
     }
 
     .tab {
@@ -615,7 +614,7 @@
     }
 
     .tab-body p {
-      font-size: 15px;
+      font-size: 12px;
       color: var(--ink-soft);
       line-height: 1.65;
       margin-bottom: 20px;
@@ -630,7 +629,7 @@
     .check-list li {
       display: flex;
       gap: 10px;
-      font-size: 14px;
+      font-size: 10px;
       color: var(--ink-soft);
       list-style: none;
       align-items: flex-start;
@@ -1209,6 +1208,27 @@
     }
 
     @media (max-width:560px) {
+      .tab {
+        flex: 1;
+        min-width: 93px;
+        text-align: center;
+        padding: 12px 16px;
+        border-radius: 12px;
+        font-size: 9px;
+        font-weight: 600;
+      }
+
+
+
+
+
+      .tabs {
+        display: flex;
+        gap: 2px;
+        padding: 8px;
+      }
+
+
       .float-card {
         padding: 10px 13px;
       }
@@ -1323,7 +1343,12 @@
       }
 
       .feature-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .feature-card p {
+        font-size: 0.7rem;
+
       }
 
       .trust-row {
