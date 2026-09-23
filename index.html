@@ -212,7 +212,32 @@
     .hero {
       padding: 88px 0 96px;
       position: relative;
+
     }
+
+
+    #how {
+  position: relative;
+  isolation: isolate;          /* keeps the image layer behind the content */
+  background: transparent;     /* removes the old background from the section itself */
+}
+#how::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(rgba(10, 15, 30, 0.75), rgba(10, 15, 30, 0.75)),
+    url("bc2.png") center / cover no-repeat;
+}
+
+
+/* If #how sits inside a narrow container and the image needs to run edge to edge: */
+#how::before {
+  left: 50%;
+  width: 100vw;
+  transform: translateX(-50%);
+}
 
     .hero-grid {
       display: grid;
